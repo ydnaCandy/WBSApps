@@ -1,8 +1,8 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-# SQLiteデータベースのURL定義 (ローカルファイルへの保存)
-SQLALCHEMY_DATABASE_URL = "sqlite:///./wbs.db"
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./wbs.db")
 
 # Engineインスタンスの作成 (SQLite固有の設定スレッドセーフ対策を含む)
 engine = create_engine(

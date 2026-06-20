@@ -1,0 +1,35 @@
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: release/backend/Dockerfile
+    container_name: wbs-backend
+    restart: unless-stopped
+    volumes:
+      - db-data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:////app/data/wbs.db
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: release/frontend/Dockerfile
+      args:
+        VITE_API_BASE_URL: ""
+    container_name: wbs-frontend
+    restart: unless-stopped
+    ports:
+      - "38080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  db-data:
