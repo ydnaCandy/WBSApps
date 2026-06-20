@@ -50,4 +50,4 @@ npm run preview  # 本番ビルドのプレビュー
 
 ## アーキテクチャ
 
-詳細は [`docs/architecture.md`](docs/architecture.md) を参照。
+詳細は [`docs/02_design.md`](docs/02_design.md) を参照。ドキュメント全体のインデックスは [`docs/README.md`](docs/README.md)。
